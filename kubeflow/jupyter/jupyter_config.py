@@ -130,3 +130,7 @@ c.KubeSpawner.extra_spawner_config = {
     'storage_class': storage_class,
     'rok_secret_name': rok_secret_name,
 }
+
+c.KubeSpawner.environment = {
+    'SHELL': '/bin/bash'
+}
