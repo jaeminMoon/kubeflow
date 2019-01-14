@@ -282,6 +282,8 @@
             "pods",
             "pods/log",
             "services",
+            "secrets",
+            "persistentvolumeclaims",
           ],
           verbs: [
             "*",
