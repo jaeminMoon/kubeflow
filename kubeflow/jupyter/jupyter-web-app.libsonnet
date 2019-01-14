@@ -105,6 +105,7 @@
             "pods/log",
             "secrets",
             "services",
+            "persistentvolumeclaims",
           ],
           verbs: [
             "*",
