@@ -165,7 +165,6 @@ std.assertEqual(
                   memory: "4Gi",
                 },
                 requests: {
-                  cpu: "500m",
                   memory: "1Gi",
                 },
               },

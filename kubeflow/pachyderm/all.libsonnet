@@ -405,7 +405,6 @@
                 ],
                 resources: {
                   requests: {
-                    cpu: "250m",
                     memory: "256M",
                   },
                 },
@@ -527,7 +526,6 @@
                 ],
                 resources: {
                   requests: {
-                    cpu: "1",
                     memory: "2G",
                   },
                 },
@@ -738,7 +736,6 @@
                 ],
                 resources: {
                   requests: {
-                    cpu: "250m",
                     memory: "512M",
                   },
                 },

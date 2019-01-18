@@ -49,7 +49,6 @@
         cpu: "4",
       }).withRequestsMixin({
         memory: "1Gi",
-        cpu: "1",
       }),
 
     local tbDeployment =

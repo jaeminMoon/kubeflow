@@ -178,7 +178,6 @@
                     memory: "1000Mi",
                   },
                   requests: {
-                    cpu: "20m",
                     memory: "50Mi",
                   },
                 },

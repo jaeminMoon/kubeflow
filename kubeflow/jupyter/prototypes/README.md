@@ -25,7 +25,6 @@ spec:
         image: gcr.io/kubeflow-images-public/tensorflow-1.10.1-notebook-cpu:v0.3.0
         resources:
           requests:
-            cpu: 500m
             memory: 1Gi
         workingDir: "/home/jovyan"
       ttlSecondsAfterFinished: 300

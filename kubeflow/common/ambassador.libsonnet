@@ -194,7 +194,6 @@
                     memory: "400Mi",
                   },
                   requests: {
-                    cpu: "200m",
                     memory: "100Mi",
                   },
                 },

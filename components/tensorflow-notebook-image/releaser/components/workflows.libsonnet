@@ -239,7 +239,6 @@
             resources: {
               requests: {
                 memory: "1.5Gi",
-                cpu: "1",
               },
               limits: {
                 memory: "4Gi",
@@ -256,7 +255,6 @@
           {
             requests: {
               memory: "500Mi",
-              cpu: "1",
             },
             limits: {
               memory: "2Gi",

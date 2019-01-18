@@ -39,7 +39,6 @@ function(request) {
         ],
         resources: {
           requests: {
-            cpu: "500m",
             memory: "1Gi",
           },
         },

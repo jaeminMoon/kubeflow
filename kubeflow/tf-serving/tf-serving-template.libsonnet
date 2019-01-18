@@ -57,7 +57,6 @@
           "nvidia.com/gpu": numGpus,
         } else {},
         requests: {
-          cpu: "1",
           memory: "1Gi",
         },
       },

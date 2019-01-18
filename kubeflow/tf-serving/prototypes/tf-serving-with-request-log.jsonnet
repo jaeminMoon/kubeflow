@@ -120,7 +120,6 @@ local deployment = {
                 memory: "4Gi",
               },
               requests: {
-                cpu: "1",
                 memory: "1Gi",
               },
             },
@@ -147,7 +146,6 @@ local deployment = {
             resources: {
               requests: {
                 memory: "1Gi",
-                cpu: "1",
               },
               limits: {
                 memory: "4Gi",
@@ -177,7 +175,6 @@ local deployment = {
             resources: {
               requests: {
                 memory: "250Mi",
-                cpu: "0.25",
               },
               limits: {
                 memory: "500Mi",

@@ -43,7 +43,6 @@ local notebook = {
             ],
             resources: {
               requests: {
-                cpu: "500m",
                 memory: "1Gi",
               },
             },
@@ -166,7 +165,6 @@ std.assertEqual(
                   ],
                   resources: {
                     requests: {
-                      cpu: "500m",
                       memory: "1Gi",
                     },
                   },
