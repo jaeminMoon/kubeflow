@@ -168,7 +168,7 @@ std.assertEqual(
       namespace: "kubeflow",
     },
     spec: {
-      replicas: 3,
+      replicas: 1,
       template: {
         metadata: {
           labels: {
@@ -213,6 +213,7 @@ std.assertEqual(
                   memory: "400Mi",
                 },
                 requests: {
+                  cpu: 0,
                   memory: "100Mi",
                 },
               },

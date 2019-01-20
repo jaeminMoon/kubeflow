@@ -141,7 +141,7 @@
     ambassadorRoleBinding:: ambassadorRoleBinding,
 
     local ambassadorDeployment = {
-      local replicas = if params.platform == "minikube" then 1 else 3,
+      local replicas = if params.platform == "minikube" then 1 else 1,
       apiVersion: "extensions/v1beta1",
       kind: "Deployment",
       metadata: {
@@ -194,6 +194,7 @@
                     memory: "400Mi",
                   },
                   requests: {
+                    cpu: 0,
                     memory: "100Mi",
                   },
                 },
