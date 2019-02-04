@@ -142,13 +142,13 @@ ksApply() {
   ks apply default -c tf-job-operator
   ks apply default -c pytorch-operator
   ks apply default -c metacontroller
-  :; #ks apply default -c spartakus
-  :; #ks apply default -c argo
-  :; #ks apply default -c pipeline
+  ks apply default -c spartakus
+  ks apply default -c argo
+  ks apply default -c pipeline
 
   # Reduce resource demands locally
   if [ "${PLATFORM}" != "minikube" ] && [ "${PLATFORM}" != "docker-for-desktop" ]; then
-    :; #ks apply default -c katib
+    ks apply default -c katib
   fi
 
   popd
@@ -192,7 +192,7 @@ parseArgs() {
       --gkeApiVersion)
         shift
         GKE_API_VERSION=$1
-        ;;
+        ;;       
       --skipInitProject)
         SKIP_INIT_PROJECT=true
         ;;
