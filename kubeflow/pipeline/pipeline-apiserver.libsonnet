@@ -272,6 +272,20 @@
           verbs: [
             "create",
             "delete",
+            "get",
+          ],
+        },
+        {
+          apiGroups: [
+            "snapshot.storage.k8s.io",
+          ],
+          resources: [
+            "volumesnapshots",
+          ],
+          verbs: [
+            "create",
+            "delete",
+            "get",
           ],
         },
         {
