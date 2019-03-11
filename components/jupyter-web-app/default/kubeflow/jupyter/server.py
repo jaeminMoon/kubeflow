@@ -85,6 +85,11 @@ def get_secret(nm, ns):
   return v1_core.read_namespaced_secret(nm, ns)
 
 
+def get_pvcs(ns):
+  pvcs = v1_core.list_namespaced_persistent_volume_claim(namespace=ns).items
+  return [pvc.metadata.name for pvc in pvcs]
+
+
 def get_default_storageclass():
   strg_classes = storage_api.list_storage_class().items
   for strgclss in strg_classes:
