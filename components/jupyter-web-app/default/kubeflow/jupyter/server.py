@@ -118,8 +118,21 @@ def get_notebooks(ns):
 
   notebooks = \
       custom_api.list_namespaced_custom_object("kubeflow.org", "v1alpha1",
-                                               ns, "notebooks")
-  return [nb['metadata']['name'] for nb in notebooks['items']]
+                                               ns, "notebooks")['items']
+
+  # Generate the list with the needed fields from the Notebooks
+  nbs = []
+  for nb in notebooks:
+    cntr = nb['spec']['template']['spec']['containers'][0]
+    nbs.append({
+        'name': nb['metadata']['name'],
+        'cpu': cntr['resources']['requests']['cpu'],
+        'mem': cntr['resources']['requests']['memory'],
+        'image': cntr['image'],
+        'status': nb['status']['conditions'][0]['type'],
+        'volumes': nb['spec']['template']['spec']['volumes'],
+    })
+  return nbs
 
 
 def delete_notebook(nb, ns):
