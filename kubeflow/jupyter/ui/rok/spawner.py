@@ -263,10 +263,15 @@ class KubeFormSpawner(spawner.KubeFormSpawner):
                 # Rok CSI needs an extra annotation to work with Rok URLs
                 annotations.update({'rok/origin': volume['rokURL']})
 
+            # First, try to delete existing Pod due to pvc-protection finalizer
+            yield self._delete_existing_notebook(self.namespace)
+
+            # Then, try to (safely) delete existing PVC
             yield self._delete_existing_pvc(volume['name'], self.namespace)
 
-            yield self._provision_new_pvc(
-                volume, self.namespace, labels, annotations)
+            # Then, provision new PVC
+            yield self._provision_new_pvc(volume, self.namespace, labels,
+                                          annotations)
 
             # Upon success, mount PVC as a volume
             self.volumes.append({
@@ -313,6 +318,41 @@ class KubeFormSpawner(spawner.KubeFormSpawner):
                    'ROK_GW_URL': 'file:%s/url' % ROK_SECRET_MOUNT,
                    'ROK_GW_PARAM_REGISTER_JUPYTER_LAB': self.pod_name}
         self.environment.update(rok_env)
+
+    @gen.coroutine
+    def _delete_existing_notebook(self, namespace):
+        """Issue a K8s API request to delete a namespaced Notebook Pod."""
+        delete_options = V1DeleteOptions()
+        del_status = None
+        pod_name = self._expand_user_properties('jupyter-{username}')
+
+        try:
+            del_status = yield self.asynchronize(
+                self.api.delete_namespaced_pod,
+                name=pod_name,
+                namespace=namespace,
+                body=delete_options
+            )
+        except ApiException as e:
+            if e.status == 404:
+                # Notebook Pod does not exist
+                return del_status
+            else:
+                self.log.warning("Could not delete Pod %s", pod_name)
+                raise
+
+        while True:
+            try:
+                yield self.asynchronize(
+                    self.api.read_namespaced_pod,
+                    name=pod_name,
+                    namespace=namespace)
+            except ApiException as e:
+                if e.status == 404:
+                    self.log.info('Pod %s was successfully deleted', pod_name)
+                    break
+
+        return del_status
 
     @gen.coroutine
     def _delete_existing_pvc(self, pvc_name, namespace):
