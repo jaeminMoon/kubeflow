@@ -68,7 +68,7 @@ spawnerFormDefaults:
         # The Name of the Workspace Volume
         # Note that this is a templated value
         # value: {username}-workspace
-        value: {username}-workspace
+        value: 'workspace-{notebook-name}'
       size:
         # The Size of the Workspace Volume (in Gi)
         value: '10'
@@ -116,4 +116,4 @@ spawnerFormDefaults:
   extraResources:
     # Extra Resource Limits for user's Notebook
     # Note that braces are escaped
-    value: "{{}}"
+    value: "{}"

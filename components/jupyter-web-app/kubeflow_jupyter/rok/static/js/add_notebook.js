@@ -100,11 +100,24 @@ function setImageType() {
 
 // Register jQuery event listeners for the Workspace Volume
 function  setWorkspaceEventListeners() {
+  var notebookName = $('#nm-inp');
   var workspaceType = $('#ws_type');
   var workspaceRokURL = $("#ws_rok_url")
   var workspaceName = $('#ws_name');
   var workspaceSize = $('#ws_size');
   var workspaceMountPath = $('#ws_mount_path');
+
+  // Change the value of the workspace volume to match the notebook
+  notebookName.on('keyup', function() {
+    let name = 'workspace-notebook';
+    if ('workspaceVolume' in formDefaults) {
+      if ('value' in formDefaults.workspaceVolume) {
+        name = formDefaults.workspaceVolume.value.name.value;
+      }
+    }
+
+    workspaceName.val(name.replace('{notebook-name}', notebookName.val()))
+  })
 
   // Disable/Enable Workspace size option based on its Type
   workspaceType.on('change', function() {
@@ -695,6 +708,17 @@ function addVolume() {
     .appendTo($('#data_volumes'));
   componentHandler.upgradeAllRegistered();
 
+  // Make the RokURL disabled by default since New is selected and 
+  // attach the listeners
+  setAttributes(volumeRokURL, {
+    'readonly': true,
+    'disabled': true,
+    'data-toggle': 'tooltip', 'data-placement': 'top',
+    'title': 'Access Mode is autofilled when mounting existing Volumes'
+  });
+  document.querySelector("#vol_rokurl_textfield"+counter).MaterialTextfield.disable()
+
+  // Create the listener
   volumeType.on('change', function() {
     var vol_id = $(this).attr('data-vol-id')
     if (this.value == 'Existing') {

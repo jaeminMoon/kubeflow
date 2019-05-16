@@ -96,8 +96,7 @@ flex-grow: 1;
 }
 
 #error-msgs {
-  min-width: 900px;
-  width: 60%;
+  width: 900px;
 }
 /* ---------- Card Table -------------*/
 .demo-card {
@@ -143,8 +142,7 @@ flex-grow: 1;
 .submit-card {
   overflow: visible !important;
   min-height: 0;
-  min-width: 900px;
-  width: 60%;
+  width: 900px;
   margin-bottom: 20px;
 }
 

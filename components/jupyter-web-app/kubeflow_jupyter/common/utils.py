@@ -30,7 +30,7 @@ def spawner_ui_config(username):
   c = None
   try:
     with open(CONFIG, "r") as f:
-      c = f.read().format(username=username)
+      c = f.read()
   except IOError:
     print("Error opening Spawner UI config file")
 

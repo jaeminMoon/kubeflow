@@ -10,7 +10,12 @@ logger = utils.create_logger(__name__)
 
 
 def parse_user_template(string):
-  return string.format(username="user")
+  try:
+    res = string.format(username="user")
+  except KeyError:
+    res = string
+
+  return res
 
 
 def rok_secret_name():
@@ -116,7 +121,7 @@ def create_datavol_pvc(body, i):
       "jupyter-dataset": pvc_nm,
   }
 
-  if body["ws_type"] == "Existing":
+  if body["vol_type" + i] == "Existing":
     annotations['rok/origin'] = body["vol_rok_url" + i]
 
   labels = {"component": "singleuser-storage"}
