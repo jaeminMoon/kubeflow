@@ -117,6 +117,24 @@ function  setWorkspaceEventListeners() {
     }
 
     workspaceName.val(name.replace('{notebook-name}', notebookName.val()))
+
+    // Also check if the name exists
+    name = $('#nm-inp').val()
+    if (existingNotebooks.indexOf(name) > -1) {
+      $("#name-input-div").addClass("is-invalid")
+      $("#name-input-div").addClass("is-dirty")
+      $("#name-error").html("A Notebook Server with this Name already exists")
+      document.getElementById("nm-inp").setCustomValidity("Please use a different Name")
+    }
+    else if (name.length > 0) {
+      $("#name-input-div").removeClass("is-invalid")
+      document.getElementById("nm-inp").setCustomValidity("")
+    } else {
+      $("#name-input-div").addClass("is-invalid")
+      $("#name-input-div").addClass("is-dirty")
+      $("#name-error").html("Notebook Server's Name can't be empty")
+      document.getElementById("nm-inp").setCustomValidity("Please provide a Name")
+    }
   })
 
   // Disable/Enable Workspace size option based on its Type

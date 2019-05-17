@@ -7,6 +7,7 @@
     var username = "{{ username }}"
     var namespace = "{{ ns }}"
     var existingPVCs = ""
+    var existingNotebooks = JSON.parse('{{ notebooks | tojson | safe }}');
     var default_storage_class = "{{ default_storage_class }}"
   </script>
   <script src="{{ prefix + url_for('static', filename='js/add_notebook.js') }}"></script>
@@ -22,7 +23,7 @@
         <!-- Top Media Header -->
         <div class="mdl-card__media card-header round-top">
           <div class="mdl-card__title white">
-            <h3 class="mdl-card__title-text">New Notebook</h3>
+            <h3 class="mdl-card__title-text">New Notebook Server</h3>
           </div>
         </div>
 
@@ -79,6 +80,7 @@
                     id="nm-inp" name="nm" data-required='true'>
               <label class="mdl-textfield__label" for="nm-inp">Notebook Name
               </label>
+              <span class="mdl-textfield__error" id='name-error'></span>
             </div>
 
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label wide">

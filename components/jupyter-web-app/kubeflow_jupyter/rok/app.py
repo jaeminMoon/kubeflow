@@ -143,6 +143,11 @@ def new_notebook():
   # Load the Rok Token
   rok_token = rok.get_rok_token('kubeflow')
 
+  try:
+    notebooks = api.get_notebooks(ns)
+  except ApiException:
+    notebooks = []
+
   form_defaults = utils.spawner_ui_config("notebook")
   return render_template(
       'add_notebook.html',
@@ -151,7 +156,9 @@ def new_notebook():
       form_defaults=form_defaults,
       username="user",
       default_storage_class=is_default,
-      rok_token=rok_token)
+      rok_token=rok_token,
+      notebooks=[nb['name'] for nb in notebooks]
+  )
 
 
 @app.route("/")
